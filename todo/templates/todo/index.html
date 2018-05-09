@@ -1,0 +1,45 @@
+{% extends 'todo/layout.html' %}
+{% load static %}
+{% block title %}All Todos{% endblock %}
+
+{% block content %}
+<div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">ToDo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="{%url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="{% url 'add' %}">Add Todo</a>
+      <a class="nav-item nav-link disabled" href="{% url 'delete_checked' %}">DeleteChecked</a>
+      <a class="nav-item nav-link disabled" href="{% url 'delete_all'%}">DeleteAll</a>
+      <a class="nav-item nav-link disabled" href="{%url 'login'%}">LOG OUT</a>
+
+
+</a>
+    </div>
+  </div>
+</nav>
+</div>
+
+        <hr>
+        {% for todo in todos %}
+        <div>
+            <table>
+                <tr>
+                    {% if todo.checked %}
+                        <td><del><a href="{% url 'uncheck' todo.id %}">{{ todo.text }}</a></del></td>
+
+
+                    {% else %}
+                        <td><a href="{% url 'check' todo.id %}">{{ todo.text }}</a></td>
+                         <td><a href="{% url 'details' todo.id %}">View todo</a></td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

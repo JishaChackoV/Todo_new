@@ -1,0 +1,21 @@
+{% load static %}
+{% load static %}
+{% block title %}All Todos{% endblock %}
+
+{% block content %}
+<h1>TODO Details</h1>
+<table style="width:100%">
+<tr>
+    <th>Task Name</th>
+    <th>Created At</th>
+    <th>Finished At</th>
+    <th>Description</th>
+</tr>
+<tr>
+   <td>{{todos.text}}</td>
+   <td>{{todos.created_at}}</td>
+   <td>{{todos.finished_at}}</td>
+   <td>{{todos.description}}</td>
+</tr>
+</table>
+{% endblock %}
