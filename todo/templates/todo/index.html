@@ -13,7 +13,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="{%url 'home' %}">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="{% url 'add' %}">Add Todo</a>
-      <a class="nav-item nav-link disabled" href="{% url 'delete_checked' %}">DeleteChecked</a>
+      <a class="nav-item nav-link disabled" href="{% url 'delete_checked' %}">MyTodos</a>
       <a class="nav-item nav-link disabled" href="{% url 'delete_all'%}">DeleteAll</a>
       <a class="nav-item nav-link disabled" href="{%url 'login'%}">LOG OUT</a>
 
@@ -42,4 +42,5 @@
         </div>
         {% endfor %}
     </div>
+    <div><marquee><h6>click your todo for check and for deletion again click on view todo</h6></marquee></div>
 {% endblock %}
