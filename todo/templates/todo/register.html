@@ -1,12 +1,14 @@
-<html>
-    <body>
+{% extends 'todo/base.html' %}
+{% load staticfiles %}
+{% block content %}
 
         <h1 >REGISTRATION</h1>
 
         <form action =" " method="post" >{% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="REGISTER" />
+            <input type="submit" class="btn btn-danger btn-rounded" value="SignUp!" />
+            <a href="{% url 'login' %}" class="btn btn-danger btn-rounded">Login!</a>
+            <p><strong>-- OR --</strong></p>
+            <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
         </form>
-
-    </body>
-</html>
+{% endblock %}

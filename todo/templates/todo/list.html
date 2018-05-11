@@ -1,0 +1,42 @@
+{% extends 'todo/layout.html' %}
+{% block content %}
+    <a href="{% url 'add' %}" class="btn btn-danger btn-sm">Create New!</a>
+     <a class="btn btn-danger btn-sm" href="{%url 'home' %}">Home <span
+                        class="sr-only">(current)</span></a>
+    <br>
+{{ request.user.id}}
+    {% if object_list %}
+        {% for post in object_list %}
+
+            <span>{{ post.todo_text }}</span>
+            <p>{{ post.body }}</p>
+
+            <a href="{% url 'details' post.id %}" class="btn btn-success btn-sm">
+                <span class="glyphicon glyphicon-edit"></span>
+                Read more</a>
+            <a href="{% url 'update' post.id %}" class="btn btn-warning btn-sm">
+                <i class="fa fa-pencil" aria-hidden="true" style="color: black"></i>
+                Edit</a>
+
+            <a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm">
+                <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
+                Delete
+            </a>
+
+                <hr>
+        {% endfor %}
+    {% endif %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
