@@ -1,8 +1,16 @@
 {% extends 'todo/layout.html' %}
 {% block content %}
     <a href="{% url 'list' %}">Go Back To list</a>
+<div class="raw">
     <form method="post">
     {% csrf_token %}
-        <button class="btn btn-danger">Are you sure you want to delete {{ object }}?</button>
+        <h4>Are you sure you want to delete {{ object }}?</h4>
+       <div class="col-sm-6">
+        <button class="btn btn-danger">Yes</button>
+       </div>
     </form>
+    <div class="col-sm-6">
+        <a href="{% url 'list' %}" class="btn btn-danger">No</a>
+    </div>
+</div>
 {% endblock %}

@@ -10,18 +10,6 @@
             <span>{{ post.todo_text }}</span>
             <p>{{ post.body }}</p>
 
-            <a href="{% url 'details' post.id %}" class="btn btn-success btn-sm">
-                <span class="glyphicon glyphicon-edit"></span>
-                Read more</a>
-            <a href="{% url 'update' post.id %}" class="btn btn-warning btn-sm" >
-                <i class="fa fa-pencil" aria-hidden="true" style="color: black"></i>
-                Edit</a>
-
-            <a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm" >
-                <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
-                Delete
-            </a>
-
                 <hr>
         {% endfor %}
     {% endif %}

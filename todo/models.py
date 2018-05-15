@@ -1,29 +1,27 @@
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser )
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 
 
-class MyUserManager(BaseUserManager):
-    def create_user(self, email, password=None, mobile_no=None, name=None):
-        if not email:
-            raise ValueError('Users must have an email address')
+class TestUserManager(BaseUserManager):
 
+    def create_user(self, username, password=None, mobile_no='9988776655', email=None):
+
+        if not username:
+            raise ValueError('Users must have an username')
+        import pdb;pdb.set_trace()
         user = self.model(
-            email=self.normalize_email(email),
+            username=username,
             mobile_no=mobile_no,
-            name=name
+            email=email,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, name, mobile_no):
-        user=self.create_user(
-        email,
-        password=password, name=name, mobile_no=mobile_no
-    )
+    def create_superuser(self, username, password, mobile_no, name=None, email=None):
+        user = self.create_user(username, password=password, mobile_no=mobile_no, email=email)
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
@@ -32,15 +30,16 @@ class MyUserManager(BaseUserManager):
 
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50, unique=True)
+    username = models.CharField(max_length=50, unique=True)
+    #name = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(max_length=50, null=True, blank=True)
     mobile_no = models.CharField(max_length=12)
-    is_staff = models.BooleanField(('staff status'), default=False,)
+    is_staff = models.BooleanField(('user status'), default=False,)
     is_superuser = models.BooleanField(('staff status'),default=False)
 
-    objects = MyUserManager()
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'mobile_no']
+    objects = TestUserManager()
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['mobile_no', 'email']
 
 
 class Todo(models.Model):
@@ -65,3 +64,6 @@ class Todo(models.Model):
         return self.filter(is_finished=False).count()
 
 
+class Registration(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    key = models.CharField(max_length=100)

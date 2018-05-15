@@ -4,10 +4,14 @@
 
 {% block content %}
 <h1>home</h1>
-        <h3>hi {{request.user.name}} ,</h3>
+    <h3>hi {{request.user.username}} ,</h3>
+    {% if request.user.is_superuser %}
+        <div>
+            <a style="font-weight: bold;"  class="btn btn-danger btn-sm" href="{% url 'userlist' %}">View Users..!</a>
+        </div>
+    {% endif %}
 
-
-        <br/>
+<br/>
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"><span class="tdr">ToDo</span></a>
@@ -22,7 +26,7 @@
                 <a class="nav-item nav-link" href="{%url 'add' %}">Add Todo</a>
                 <a class="nav-item nav-link" href="{%url 'list' %}">VIEW YOUR TODOS</a>
                 <a class="nav-item nav-link" href="{% url 'reg' %}">SignUp!</a>
-                <a class="nav-item nav-link disabled" href="{%url 'login'% }">Logout!</a>
+                <a class="nav-item nav-link disabled" href="{% url 'logout' %}">Logout!</a>
 
 
             </div>
@@ -84,6 +88,6 @@
     </a>
 </div>
 <div>
-    <marquee><h6>*click your todo for check and for deletion click again on view todo</h6></marquee>
+    <marquee><h6>*best Todo app</h6></marquee>
 </div>
 {% endblock %}

@@ -30,6 +30,8 @@
                 </li>
                 <li class="list-inline-item">
                     <a href="{% url 'reg' %}" class="btn btn-danger btn-rounded">Sign up!</a>
+                    <a href="{% url 'login' %}" class="btn btn-danger btn-rounded">Login!</a>
+
                 </li>
             {% endif %}
     {% block content %}
@@ -44,11 +46,7 @@
         $('.datepicker').datepicker();
     })
 
-    (function($) {
-    $(function() {
-        $('input.time').timepicker();
-    });
-})(jQuery);
+
   </script>
 
 
