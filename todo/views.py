@@ -1,6 +1,5 @@
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import *
-from django.core.signing import Signer
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
@@ -11,7 +10,8 @@ from .forms import *
 from .models import *
 from django.views.generic import *
 from django.views.generic.detail import DetailView
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import send_mail
+from django.core.signing import Signer
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -25,21 +25,20 @@ class RegisterUserView(FormView):
     success_url = '/login'
 
     def form_valid(self, form):
-        get_user_model().objects.create_user(form.cleaned_data.get('username'),
-                                             form.cleaned_data.get('password'),
-                                             form.cleaned_data.get('mobile_no'),
-                                             form.cleaned_data.get('email')
-                                             )
+        # get_user_model().objects.create_user(form.cleaned_data.get('username'),
+        #                                      form.cleaned_data.get('password'),
+        #                                      form.cleaned_data.get('mobile_no'),
+        #                                      form.cleaned_data.get('email')
+        #                                      )
         obj = form.save(commit=False)
         obj.password = make_password(obj.password)
-        obj.is_active = False
-        form.save()
+        #obj.is_active = False
         signer = Signer()
         signed_value = signer.sign(obj.email)
         key = ''.join(signed_value.split(':')[1:])
         reg_obj = Registration.objects.create(user=obj, key=key)
         msg_html = render_to_string('todo/acc_active_email.html', {'key': key})
-        send_mail("123", "123", 'jishavchacko1995@gmail.com', [obj.email], html_message=msg_html, fail_silently=False)
+        send_mail("123", "123", 'anjitha.test@gmail.com', [obj.email], html_message=msg_html, fail_silently=False)
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
@@ -143,7 +142,7 @@ class AduserListView(LoginRequiredMixin, ListView):
 
 
 class RegistrationSuccess(TemplateView):
-    template_name = 'shopping_app/registration-success.html'
+    template_name = 'todo/registrationsuccess.html'
 
     def get(self, request, args, *kwargs):
         key = self.kwargs.get("key")

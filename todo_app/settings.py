@@ -75,6 +75,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'todo_app.wsgi.application'
+EMAIL_USE_TLS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'anjitha.test@gmail.com'
+EMAIL_HOST_PASSWORD = 'password@1234'
+
+DEFAULT_FROM_EMAIL = 'anjitha.test@gmail.com'
+
 
 
 # Database
@@ -132,7 +143,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'todo.UserProfile'
 
 AUTHENTICATION_BACKENDS = (
-    # 'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.github.GithubOAuth2',
     # 'social_core.backends.twitter.TwitterOAuth',
     # 'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
@@ -148,13 +159,3 @@ SOCIAL_AUTH_TWITTER_KEY = '9TD12xahCWCDdyLzpmw61GSM9'
 SOCIAL_AUTH_TWITTER_SECRET = 'H5rjn90z3OcJxzCvWyrtXnmEM9fXwDww5V3RUQepWUNAyrEp8z'
 
 
-EMAIL_USE_TLS = True
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jishavchacko1995@gmail.com'
-EMAIL_HOST_PASSWORD = 'jisha@123'
-
-DEFAULT_FROM_EMAIL = 'jishavchacko1995@gmail.com'

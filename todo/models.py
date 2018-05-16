@@ -10,7 +10,6 @@ class TestUserManager(BaseUserManager):
 
         if not username:
             raise ValueError('Users must have an username')
-        import pdb;pdb.set_trace()
         user = self.model(
             username=username,
             mobile_no=mobile_no,
@@ -36,7 +35,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     mobile_no = models.CharField(max_length=12)
     is_staff = models.BooleanField(('user status'), default=False,)
     is_superuser = models.BooleanField(('staff status'),default=False)
-
+    #is_active =  models.BooleanField('is_active',default=False)
     objects = TestUserManager()
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['mobile_no', 'email']
