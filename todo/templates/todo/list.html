@@ -1,15 +1,17 @@
 {% extends 'todo/layout.html' %}
+{% load static %}
 {% block content %}
+<body background="{% static '/images/ss.jpg' %}" >
     <a href="{% url 'add' %}" class="btn btn-danger btn-sm">Create New!</a>
      <a class="btn btn-danger btn-sm" href="{%url 'home' %}">Home <span
                         class="sr-only">(current)</span></a>
     <br>
     {% if object_list %}
         {% for post in object_list %}
+    <div style="text-align:center">
 
-            <span>{{ post.todo_text }}</span>
-            <p>{{ post.body }}</p>
-
+    <div class="boxed" style="border: 3px solid black"><span class="list " style="color:white;"><h3>{{ post.todo_text }}</h3></span>
+           <div style="width: 50%; margin: 0 auto; align:left"></div> <p>{{ post.body }}</p>
             <a href="{% url 'details' post.id %}" class="btn btn-success btn-sm">
                 <span class="glyphicon glyphicon-edit"></span>
                 Read more</a>
@@ -21,7 +23,9 @@
                 <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
                 Delete
             </a>
-
+    </div>
+    </div>
+    </div>
                 <hr>
         {% endfor %}
     {% endif %}
@@ -38,4 +42,5 @@
             {% endif %}
         </span>
     </div>
+</body>
 {% endblock %}

@@ -2,16 +2,18 @@
 {% load staticfiles %}
 
 {% block content %}
-
-<div class="row">
-                <div class="col-sm-4"></div><div class="col-sm-4">
-    <h1>Add Your Todo</h1>
-
-    <form action =" " method="post" enctype="multipart/form-data">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="add todo" />
-    </form>
+<body background="{% static '/images/bg.jpg' %}" >
+<div class="row todoform">
+    <div class="col-sm-4"></div><div class="col-sm-4">
+        <h1 class="hea" style="text-decoration-line: underline;text-decoration-style: double;">Add Your Todo</h1>
+        <div class="form-group">
+            <form action =" " method="post" enctype="multipart/form-data">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-info" value="Add todo" />
+                <a class = "btn btn-danger" href="/"> Back to Home </a>
+            </form>
+        </div>
     </div>
-    </div>
-
+</div>
+</body>
 {% endblock %}

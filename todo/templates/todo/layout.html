@@ -18,9 +18,9 @@
       <title>Todo App | {% block title %}{% endblock %}</title>
   </head>
   <body class="container mt-5 mb-5 ml-5 mr-5">
-    <div><h1>Welcome To ToDo App</h1></div>
+    <div style="text-align:center;color:yellowgreen"><h2>Welcome To ToDo App</h2></div>
      {% if request.user.is_superuser %}
-
+            <div style="align:center">
                 <li class="list-inline-item">
                     <a href="{% url 'add' %}" class="btn btn-danger btn-rounded">Add New Todo..!</a>
                 </li>
@@ -33,6 +33,7 @@
                     <a href="{% url 'login' %}" class="btn btn-danger btn-rounded">Login!</a>
 
                 </li>
+            </div>
             {% endif %}
     {% block content %}
     {% endblock %}

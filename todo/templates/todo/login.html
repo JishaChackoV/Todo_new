@@ -3,7 +3,7 @@
 {% block content %}
 
         <h1 >LOGIN</h1>
-
+ <div class="form-group">
         <form action =" " method="post">{% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="btn btn-danger btn-rounded" value="LOGIN" />
@@ -12,4 +12,5 @@
             <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
             <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
         </form>
+ </div>
 {% endblock %}

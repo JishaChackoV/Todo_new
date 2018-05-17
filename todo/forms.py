@@ -4,18 +4,15 @@ from .models import *
 
 
 class TodoForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(TodoForm, self).__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs = {'class': 'form-control'}
 
     class Meta:
         model = Todo
         fields = ['todo_text', 'due_date', 'time', 'description']
         widgets = {
-            'due_date': forms.DateInput(attrs={'class': 'datepicker' ,'placeholder': 'Select a date'}),
-            'time': forms.TimeInput(attrs={'class': 'time', 'placeholder': 'HH:MM:SS'})
-
+            'due_date': forms.DateInput(attrs={'class': 'datepicker form-control' ,'placeholder': 'Select a date'}),
+            'time': forms.TimeInput(attrs={'class ': 'time form-control', 'placeholder': 'HH:MM:SS'}),
+            'todo_text': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 
